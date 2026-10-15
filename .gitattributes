@@ -8,3 +8,4 @@ phpunit.xml* export-ignore
 /templates export-ignore
 /assets export-ignore
 /.idea export-ignore
+auth.json export-ignore
