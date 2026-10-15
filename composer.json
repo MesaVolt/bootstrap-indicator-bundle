@@ -1,5 +1,15 @@
 {
     "name": "mesavolt/bootstrap-indicator-bundle",
+    "description": "Symfony toolbar indicator with the current Bootstrap viewport breakpoint",
+    "homepage": "https://github.com/MesaVolt/bootstrap-indicator-bundle",
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "MesaVolt",
+            "homepage": "https://mesavolt.com"
+        }
+    ],
+    "keywords": ["symfony", "toolbar", "profiler", "bootstrap", "css", "viewport", "breakpoint"],
     "type": "symfony-bundle",
     "license": "MIT",
     "minimum-stability": "stable",
