@@ -1,7 +1,7 @@
 {
     "name": "mesavolt/bootstrap-indicator-bundle",
     "type": "symfony-bundle",
-    "license": "symfony-bundle",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
