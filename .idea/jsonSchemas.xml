@@ -3,6 +3,22 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="Symfony Services Configuration">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="Symfony Services Configuration" />
+              <option name="relativePathToSchema" value="https://raw.githubusercontent.com/symfony/symfony/8.1/src/Symfony/Component/DependencyInjection/Loader/schema/services.schema.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="config/services.yaml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="composer.json">
           <value>
             <SchemaInfo>

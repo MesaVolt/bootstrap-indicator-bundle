@@ -1,0 +1,88 @@
+{# documentation at https://symfony.com/doc/5.x/profiler.html#adding-web-profiler-templates #}
+{# templates/data_collector/template.html.twig #}
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set breakpoint %}
+        <span class="d-sm-none">XS</span>
+        <span class="d-none d-sm-inline d-md-none">SM</span>
+        <span class="d-none d-md-inline d-lg-none">MD</span>
+        <span class="d-none d-lg-inline d-xl-none">LG</span>
+        <span class="d-none d-xl-inline d-xxl-none">XL</span>
+        <span class="d-none d-xxl-inline">XXL</span>
+    {% endset %}
+
+    {% set icon %}
+        {% if collector.designVersion == '>=6.2' %}
+            {#
+                https://symfony.com/doc/8.1/profiler.html#creating-a-data-collector
+                Symfony Profiler icons are selected from Tabler icons, a large and open source collection of SVG icons.
+                It's recommended to also use those icons for your own profiler panels to get a consistent look.
+            #}
+            <!-- https://tabler.io/icons?icon=viewport-wide -->
+            <svg xmlns="http://www.w3.org/2000/svg" data-icon-name="icon-tabler-viewport-wide"
+                 width="24" height="24" viewBox="0 0 24 24" role="img"
+                 stroke-width="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <title>Bootstrap viewport breakpoint</title>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <g id="corners" class="d-none d-md-inline">
+                    <path d="M10 12h-7l3 -3"></path>
+                    <path d="M6 15l-3 -3"></path>
+                    <path d="M14 12h7l-3 -3"></path>
+                    <path d="M18 15l3 -3"></path>
+                </g>
+                <g id="frame">
+                    <path d="M3 6v-1a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v1"></path>
+                    <path d="M3 18v1a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-1"></path>
+                </g>
+            </svg>
+        {% else %}
+            <!-- https://pictogrammers.com/library/mdi/icon/monitor-screenshot/ -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>Bootstrap viewport breakpoint</title>
+                <path id="corners" class="d-none d-md-inline" fill="#AAA" d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19"></path>
+                <path id="frame" fill="#AAA" d="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z"></path>
+            </svg>
+        {% endif %}
+
+        <span class="sf-toolbar-value">
+            {{ breakpoint }}
+        </span>
+
+        <style>
+            {% set collector_name = constant('Mesavolt\\BootstrapIndicatorBundle\\DataCollector\\BootstrapIndicatorCollector::NAME') %}
+            /*
+             this selector is applied by Symfony to the wrapping parent element
+             and uses the getName() method of the collector
+            */
+            .sf-toolbar-block-{{ collector_name }} {
+                position: relative;
+
+                .bootstrap-indicator-collector-embedded-viewport {
+                    position: absolute;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                    justify-content: center;
+
+                    &[data-design-version="<6.2"] {
+                        top: -2px;
+                        font-size: 9px;
+                    }
+                }
+            }
+        </style>
+
+        <div class="bootstrap-indicator-collector-embedded-viewport d-md-none" data-design-version="{{ collector.designVersion }}">
+            {{ breakpoint }}
+        </div>
+    {% endset %}
+
+    {# the 'link' value set to 'false' means that this panel doesn't show a section in the web profiler #}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+{% endblock %}

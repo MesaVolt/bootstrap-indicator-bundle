@@ -1,11 +1,13 @@
 {
     "name": "mesavolt/bootstrap-indicator-bundle",
-    "type": "project",
-    "license": "proprietary",
+    "type": "symfony-bundle",
+    "license": "symfony-bundle",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4.1",
+        "composer-runtime-api": ">=2",
+        "composer/semver": "^3.5",
         "symfony/framework-bundle": "*",
         "symfony/web-profiler-bundle": "*"
     },
@@ -24,13 +26,6 @@
         "psr-4": {
             "Mesavolt\\BootstrapIndicatorBundle\\Tests\\": "tests/"
         }
-    },
-    "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*"
-    },
-    "scripts": {
     },
     "conflict": {
         "symfony/symfony": "*"
