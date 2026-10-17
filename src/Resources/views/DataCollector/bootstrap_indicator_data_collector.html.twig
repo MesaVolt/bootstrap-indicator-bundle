@@ -4,12 +4,20 @@
 
 {% block toolbar %}
     {% set breakpoint %}
-        <span class="d-sm-none">XS</span>
-        <span class="d-none d-sm-inline d-md-none">SM</span>
-        <span class="d-none d-md-inline d-lg-none">MD</span>
-        <span class="d-none d-lg-inline d-xl-none">LG</span>
-        <span class="d-none d-xl-inline d-xxl-none">XL</span>
-        <span class="d-none d-xxl-inline">XXL</span>
+        <span class="hidden">
+            <span class="d-sm-none">XS</span>
+            <span class="d-none d-sm-inline d-md-none">SM</span>
+            <span class="d-none d-md-inline d-lg-none">MD</span>
+            <span class="d-none d-lg-inline d-xl-none">LG</span>
+            <span class="d-none d-xl-inline d-xxl-none">XL</span>
+            <span class="d-none d-xxl-inline">XXL</span>
+        </span>
+        <span class="d-none">
+            <span class="visible-xs-inline">XS</span>
+            <span class="visible-sm-inline">SM</span>
+            <span class="visible-md-inline">MD</span>
+            <span class="visible-lg-inline">LG</span>
+        </span>
     {% endset %}
 
     {% set icon %}
@@ -25,7 +33,7 @@
                  stroke-width="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <title>Bootstrap viewport breakpoint</title>
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <g id="corners" class="d-none d-md-inline">
+                <g id="corners" class="d-none d-md-inline hidden-xs">
                     <path d="M10 12h-7l3 -3"></path>
                     <path d="M6 15l-3 -3"></path>
                     <path d="M14 12h7l-3 -3"></path>
@@ -40,7 +48,7 @@
             <!-- https://pictogrammers.com/library/mdi/icon/monitor-screenshot/ -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <title>Bootstrap viewport breakpoint</title>
-                <path id="corners" class="d-none d-md-inline" fill="#AAA" d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19"></path>
+                <path id="corners" class="d-none d-md-inline hidden-xs" fill="#AAA" d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19"></path>
                 <path id="frame" fill="#AAA" d="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z"></path>
             </svg>
         {% endif %}
@@ -51,10 +59,7 @@
 
         <style>
             {% set collector_name = constant('Mesavolt\\BootstrapIndicatorBundle\\DataCollector\\BootstrapIndicatorCollector::NAME') %}
-            /*
-             this selector is applied by Symfony to the wrapping parent element
-             and uses the getName() method of the collector
-            */
+            {# this selector is applied by Symfony to the wrapping parent element and the collector'name #}
             .sf-toolbar-block-{{ collector_name }} {
                 position: relative;
 
@@ -78,7 +83,8 @@
             }
         </style>
 
-        <div class="bootstrap-indicator-collector-embedded-viewport d-md-none" data-design-version="{{ collector.designVersion }}">
+        <div class="bootstrap-indicator-collector-embedded-viewport d-md-none hidden-sm hidden-md hidden-lg"
+             data-design-version="{{ collector.designVersion }}">
             {{ breakpoint }}
         </div>
     {% endset %}
