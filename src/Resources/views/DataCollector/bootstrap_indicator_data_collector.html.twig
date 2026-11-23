@@ -58,18 +58,27 @@
         </span>
 
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // --exception-title-color CSS variable is defined in
-                // symfony/error-handler/Resources/assets/css/exception.css
-                // which is used to render the default error page which uses a Symfony-defined style without bootstrap
-                // (since the app's style won't have been loaded, so the Bootstrap classes will have no effect)
-                const isSymfonyErrorPage = getComputedStyle(document.documentElement).getPropertyValue('--exception-title-color');
-                if (isSymfonyErrorPage) {
-                    return;
+            (() => {
+                const showViewportLabel = () => {
+                    // --exception-title-color CSS variable is defined in
+                    // symfony/error-handler/Resources/assets/css/exception.css
+                    // which is used to render the default error page which uses a Symfony-defined style without bootstrap
+                    // (since the app's style won't have been loaded, so the Bootstrap classes will have no effect)
+                    const isSymfonyErrorPage = getComputedStyle(document.documentElement).getPropertyValue('--exception-title-color');
+                    if (isSymfonyErrorPage) {
+                        console.debug('on symfony error page, not activating bootstrap indicator');
+                        return;
+                    }
+                    const hideClass = 'bootstrap-indicator-collector-hide-if-not-initialized';
+                    document.querySelectorAll(`.${hideClass}`).forEach((element) => element.classList.remove(hideClass));
+                };
+
+                if (document.readyState === 'complete') {
+                    showViewportLabel();
+                } else {
+                    document.addEventListener('DOMContentLoaded', showViewportLabel);
                 }
-                const hideClass = 'bootstrap-indicator-collector-hide-if-not-initialized';
-                document.querySelectorAll(`.${hideClass}`).forEach((element) => element.classList.remove(hideClass));
-            });
+            })();
         </script>
 
         <style>
